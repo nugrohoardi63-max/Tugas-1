@@ -1,0 +1,106 @@
+====================================================
+JAWABAN SQL QUERIES - DATABASE myshop
+====================================================
+
+----------------------------------------------------
+SOAL 1 - Membuat Database
+----------------------------------------------------
+
+CREATE DATABASE myshop;
+
+USE myshop;
+
+
+----------------------------------------------------
+SOAL 2 - Membuat Table di Dalam Database
+----------------------------------------------------
+
+-- Tabel users
+CREATE TABLE users (
+    id       INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name     VARCHAR(255),
+    email    VARCHAR(255),
+    password VARCHAR(255)
+);
+
+-- Tabel categories
+CREATE TABLE categories (
+    id   INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+-- Tabel items
+CREATE TABLE items (
+    id          INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(255),
+    description VARCHAR(255),
+    price       INTEGER,
+    stock       INTEGER,
+    category_id INTEGER,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+
+----------------------------------------------------
+SOAL 3 - Memasukkan Data pada Table
+----------------------------------------------------
+
+-- Insert data ke tabel users
+INSERT INTO users (name, email, password) VALUES
+    ('John Doe', 'john@doe.com', 'john123'),
+    ('Jane Doe', 'jane@doe.com', 'jenita123');
+
+-- Insert data ke tabel categories
+INSERT INTO categories (name) VALUES
+    ('gadget'),
+    ('cloth'),
+    ('men'),
+    ('women'),
+    ('branded');
+
+-- Insert data ke tabel items
+INSERT INTO items (name, description, price, stock, category_id) VALUES
+    ('Sumsang b50', 'hape keren dari merek sumsang',   4000000, 100, 1),
+    ('Uniklooh',   'baju keren dari brand ternama',     500000,  50, 2),
+    ('IMHO Watch', 'jam tangan anak yang jujur banget', 2000000,  10, 1);
+
+
+----------------------------------------------------
+SOAL 4 - Mengambil Data dari Database
+----------------------------------------------------
+
+-- 4a. Mengambil semua data users KECUALI field password
+SELECT id, name, email
+FROM users;
+
+
+-- 4b-i. Mengambil data items dengan harga di atas 1.000.000
+SELECT *
+FROM items
+WHERE price > 1000000;
+
+
+-- 4b-ii. Mengambil data items yang namanya mirip dengan kata kunci "sang"
+SELECT *
+FROM items
+WHERE name LIKE '%sang%';
+
+-- (Alternatif dengan kata kunci "uniklo")
+-- SELECT * FROM items WHERE name LIKE '%uniklo%';
+
+-- (Alternatif dengan kata kunci "watch")
+-- SELECT * FROM items WHERE name LIKE '%watch%';
+
+
+-- 4c. Menampilkan data items beserta nama kategorinya (JOIN)
+SELECT
+    items.name,
+    items.description,
+    items.price,
+    items.stock,
+    items.category_id,
+    categories.name AS kategori
+FROM items
+JOIN categories ON items.category_id = categories.id;
+
+====================================================
