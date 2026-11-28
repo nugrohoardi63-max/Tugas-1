@@ -66,6 +66,24 @@
             box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
         }
 
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-outline:hover {
+            background: #f5f7ff;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.25);
+        }
+
         .footer {
             margin-top: 30px;
             font-size: 0.8rem;
@@ -78,7 +96,10 @@
         <div class="logo">📦</div>
         <h1>Inventory App</h1>
         <p>Selamat datang di aplikasi manajemen inventaris kami. Silakan daftarkan diri Anda untuk mulai menggunakan layanan kami.</p>
-        <a href="{{ route('register') }}" class="btn">Daftar Sekarang →</a>
+        <div class="btn-group">
+            <a href="{{ route('category.index') }}" class="btn">Kelola Kategori →</a>
+            <a href="{{ route('register') }}" class="btn btn-outline">Daftar Sekarang</a>
+        </div>
         <div class="footer">
             &copy; 2024 Inventory App. All rights reserved.
         </div>
